@@ -1,0 +1,7 @@
+.gradle
+/local.properties
+/build
+/pojotest/build
+.DS_Store
+.idea
+*.iml

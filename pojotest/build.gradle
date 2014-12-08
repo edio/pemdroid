@@ -1,0 +1,20 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // That's for gradle
+    testCompile files(project(':app').buildDir.path + "/intermediates/classes/debug")
+    testCompile files(project(':app').buildDir.path + "/intermediates/classes/release")
+    testCompile 'junit:junit:4.11'
+    // That's for IDE
+    testCompile project(':app')
+}

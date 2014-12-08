@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/expense_item"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/content_horizontal_padding"
+              android:paddingRight="@dimen/content_horizontal_padding"
+              android:paddingBottom="@dimen/content_vertical_padding"
+              android:paddingTop="@dimen/content_vertical_padding"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:id="@+id/adapter_expense_description"
+                  android:text="Description"
+                  style="@style/Base.TextAppearance.AppCompat.Body2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
+        <TextView android:id="@+id/adapter_expense_total"
+                  android:numeric="decimal"
+                  android:text="0.00"
+                  style="@style/Base.TextAppearance.AppCompat.Body2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="0"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:id="@+id/adapter_expense_category"
+                  android:text="Category"
+                  style="@style/Base.TextAppearance.AppCompat.Caption"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
+        <TextView android:id="@+id/adapter_expense_date"
+                  android:text="Yesterday"
+                  style="@style/Base.TextAppearance.AppCompat.Caption"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="0"/>
+    </LinearLayout>
+
+</LinearLayout>

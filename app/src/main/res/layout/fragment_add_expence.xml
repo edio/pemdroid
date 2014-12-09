@@ -6,6 +6,7 @@
              android:paddingRight="@dimen/content_horizontal_padding"
              android:paddingTop="@dimen/content_vertical_padding"
              android:paddingBottom="@dimen/content_vertical_padding"
+             android:background="@drawable/top_border_bg"
              tools:context="edio.pemdroid.fragment.AddExpenceFragment">
 
     <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
@@ -13,40 +14,60 @@
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:orientation="horizontal" android:layout_weight="1">
             <EditText
-                    android:id="@+id/edit_expense_description"
-                    android:hint="Expense"
-                    android:nextFocusForward="@+id/edit_expense_total"
-                    android:imeOptions="actionNext"
+                    android:id="@+id/add_expense_description"
+                    android:hint="Description"
+                    android:nextFocusForward="@+id/add_expense_total"
+                    android:imeOptions="actionNext|flagNoExtractUi"
+                    android:inputType="textCapWords"
                     android:singleLine="true"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_weight="1"/>
+
+            <ToggleButton
+                    android:id="@+id/action_expense_income"
+                    android:button="@drawable/action_expense_income"
+                    android:background="@null"
+                    android:textSize="@dimen/abc_text_size_caption_material"
+                    android:textOff=""
+                    android:textOn=""
+                    android:layout_width="@dimen/button_add_expense_size"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"/>
+
             <EditText
-                    android:id="@id/edit_expense_total"
-                    android:hint="0.00"
+                    android:id="@id/add_expense_total"
+                    android:hint="Amount"
+                    android:imeOptions="flagNoExtractUi"
                     android:gravity="end"
-                    android:inputType="number"
-                    android:layout_width="120sp" android:layout_height="wrap_content"/>
+                    android:inputType="numberDecimal"
+                    android:layout_width="100sp" android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:orientation="horizontal">
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
                           android:gravity="left" android:layout_weight="1">
-                <ImageButton
-                        android:src="@drawable/action_labels"
+                <Button
+                        android:drawableLeft="@drawable/action_labels"
+                        android:gravity="left"
+                        android:text="Category"
+                        android:textSize="@dimen/abc_text_size_caption_material"
                         android:background="@null"
-                        android:padding="0dp"
+                        android:padding="2dp"
+                        android:layout_marginRight="@dimen/content_horizontal_padding"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="sweets"/>
+                        android:layout_height="@dimen/button_add_expense_size"
+                        android:layout_weight="1"/>
+
             </LinearLayout>
 
             <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
                 <ImageButton
+                        android:id="@+id/add_expense_accept"
                         android:src="@drawable/action_accept"
                         android:background="@null"
-                        android:padding="0dp"
+                        android:padding="2dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="@dimen/button_add_expense_size"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

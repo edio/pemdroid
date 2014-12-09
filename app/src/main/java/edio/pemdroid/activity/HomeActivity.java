@@ -7,26 +7,40 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import edio.pemdroid.R;
+import edio.pemdroid.adapter.ExpenseArrayAdapter;
+import edio.pemdroid.fragment.AddExpenceFragment;
+import edio.pemdroid.fragment.ExpenseListFragment;
 import edio.pemdroid.model.Expense;
 import edio.pemdroid.model.ExpenseManager;
+import edio.pemdroid.model.Month;
 
 import java.io.File;
 import java.util.List;
 
 
-public class HomeActivity extends ActionBarActivity implements ExpenseHistoryProvider {
+public class HomeActivity extends ActionBarActivity implements ExpenseHistoryProvider, ExpenseManagerAware, AddExpenceFragment.OnAddedListener {
 
     private ExpenseManager expenseManager;
+    private ExpenseListFragment entriesList;
+    private AddExpenceFragment addExpenceFragment;
+    private List<Expense> expenses;
+    private ExpenseArrayAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        ListFragment entriesList = (ListFragment) getFragmentManager().findFragmentById(R.id.entries_list_fragment);
+        entriesList = (ExpenseListFragment) getFragmentManager().findFragmentById(R.id.fragment_entries_list);
+        addExpenceFragment = (AddExpenceFragment) getFragmentManager().findFragmentById(R.id.fragment_add_expense);
+        addExpenceFragment.setOnAddedListener(this);
 
         File pem = getPemFolder("pem");
         expenseManager = new ExpenseManager(pem);
+
+        expenses = expenseManager.readAll();
+        listAdapter = new ExpenseArrayAdapter(this, expenses);
+        entriesList.setListAdapter(listAdapter);
     }
 
 
@@ -65,4 +79,14 @@ public class HomeActivity extends ActionBarActivity implements ExpenseHistoryPro
         return expenseManager.readAll();
     }
 
+    @Override
+    public ExpenseManager getActiveExpenseManager() {
+        return expenseManager;
+    }
+
+    @Override
+    public void onExpenseAdded(Expense expense, int year, Month month) {
+        expenses.add(expense);
+        listAdapter.notifyDataSetChanged();
+    }
 }

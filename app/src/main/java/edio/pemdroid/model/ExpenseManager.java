@@ -50,19 +50,23 @@ public class ExpenseManager {
         }
     }
 
-    public void append(Expense expense) {
+    public void write(Expense expense) {
         Date timestamp = expense.getTimestamp();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(timestamp);
         int year = calendar.get(Calendar.YEAR);
         int monthNumber = calendar.get(Calendar.MONTH);
         Month month = Month.fromOrdinal(monthNumber);
+
+        File targetFile = new File(homeDir, toPath(year, month));
+        appendToFile(targetFile, expense);
     }
 
     private void appendToFile(File expenseFile, Expense expense) {
         FileWriter fw;
         try {
             if (!expenseFile.exists()) {
+                expenseFile.getParentFile().mkdirs();
                 fw = new FileWriter(expenseFile, false);
             } else if (expenseFile.isFile()) {
                 fw = new FileWriter(expenseFile, true);
@@ -73,8 +77,10 @@ public class ExpenseManager {
             // TODO throw proper exception
             throw new IllegalStateException(e);
         }
-        PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
-        pw.println();
+
+        try(PrintWriter pw = new PrintWriter(new BufferedWriter(fw))) {
+            pw.println(expense.toCsv());
+        }
     }
 
     private List<Expense> readFile(File expenseFile) {
@@ -91,6 +97,7 @@ public class ExpenseManager {
     }
 
     private static String toPath(int year, Month month) {
+        year %= 100;
         return String.format("%2d/%s", year, month.getPemMonth());
     }
 

@@ -30,7 +30,7 @@ public class ExpenseArrayAdapter extends ArrayAdapter<Expense> {
         TextView description = (TextView) rowView.findViewById(R.id.adapter_expense_description);
         description.setText(item.getDescription());
         TextView total = (TextView) rowView.findViewById(R.id.adapter_expense_total);
-        total.setText(fmt.format(item.getTotal()));
+        total.setText(fmt.format(item.getTotal()/100.0));
         TextView category = (TextView) rowView.findViewById(R.id.adapter_expense_category);
         category.setText(item.getCategory());
         TextView timestamp = (TextView) rowView.findViewById(R.id.adapter_expense_date);
